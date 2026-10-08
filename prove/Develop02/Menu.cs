@@ -5,7 +5,7 @@ class Menu
         int input = 0;
         while (input< 1 || input>5)
         {
-            Console.WriteLine("Welcome to the Journal Program.");
+            Console.WriteLine("\n\nWelcome to the Journal Program.");
             Console.WriteLine("Create, Display, Save, or Read Journal Entries.");
             Console.WriteLine("1. Create new Journal Entry");
             Console.WriteLine("2. Display all journal entries.");
