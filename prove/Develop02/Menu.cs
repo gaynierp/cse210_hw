@@ -1,5 +1,6 @@
 using System.Security.Cryptography.X509Certificates;
-
+// My Creativity for this assignment was to figure out a way to make the menu disappear on repeated use!
+// I used Try/Catch and more if statements to accomplish this!
 class Menu
 {
 string hide = "";
