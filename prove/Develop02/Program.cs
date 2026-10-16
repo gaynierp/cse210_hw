@@ -1,6 +1,6 @@
 using System;
-using System.Runtime.CompilerServices;
-
+// My Creativity for this assignment was to figure out a way to make the menu disappear on repeated use!
+// I used Try/Catch and more if statements to accomplish this!
 class Program
 {
     static void Main(string[] args)
