@@ -1,33 +1,46 @@
-using System.IO;
 class Journal
 {
-    public void WriteToFile(string filename, string entry)
-    {   
-        if (!File.Exists(filename)) // I looked this up because I was working on this on my own and couldn't figure out how to get it to find the file.
+    public List<JournalEntry> _entries = new List<JournalEntry>();
+
+
+    public void DisplayJournal()
+    {
+        foreach(JournalEntry entry in _entries)
         {
-            File.Create(filename);
+            entry.DisplayJournalEntry();
         }
-        using (StreamWriter outputFile = new StreamWriter (filename))
+    }
+
+    public void CreateEntry()
+    {
+        JournalEntry newEntry = new JournalEntry();
+        newEntry.CreateJournalEntry();
+        newEntry.FormatEntry();
+        _entries.Add(newEntry);
+    }
+    public void ReadFromFile(string filename)
+    {
+        string[] lines = System.IO.File.ReadAllLines(filename);
+
+        foreach (string line in lines)
         {
+            string[] parts = line.Split("#");
+
+            string date = parts[0];
+            string prompt = parts[1];
+            string response = parts[2];
+            Console.WriteLine($"{date}, {prompt}\n{response}");
+
+        }
+    }
+    public void WriteToFile(string filename)
+    {
+        using (StreamWriter outputFile = new StreamWriter(filename))
+        {
+            foreach(JournalEntry entry in _entries)
             {
-                outputFile.WriteLine($"{entry}");
+                outputFile.WriteLine(entry.FormatEntry());
             }
         }
-    }
-    public void ReadFromFile(string file)
-    {
-        if (!File.Exists(file))
-        {
-            File.Create(file);
-        }
-        string[] lines = System.IO.File.ReadAllLines(file);
-        foreach(string line in lines)
-        {
-            Console.WriteLine(line);
-        }
-    }
-    public void DisplayJournal(string entry)
-    {
-        Console.WriteLine(entry);
     }
 }

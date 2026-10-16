@@ -1,14 +1,19 @@
 class JournalEntry
 {
-    public string GetDate()
+    private string _date;
+    private string _prompt;
+    private string _response;
+
+
+    public void DisplayJournalEntry()
     {
-        DateTime theCurrentTime = DateTime.Now;
-        string dateText = theCurrentTime.ToShortDateString();
-        return dateText;
+        Console.WriteLine($"{_date}, {_prompt}");
+        Console.WriteLine(_response);
     }
-    public string RandomPrompt()
+
+    public void CreateJournalEntry()
     {
-        List<string> promptList = new List<string>
+        string [] prompts =
         {
             "What did you do today?", 
             "What were you looking forward to today?", 
@@ -18,23 +23,18 @@ class JournalEntry
             "What adivce would you give yourself for tomorrow?", 
             "What did you eat today?", 
             "What could you have done better today?"
-
         };
-        Random number = new Random();
-        int randomIndex = number.Next(promptList.Count);
-        string prompt = promptList[randomIndex];
-        return prompt;
-
-    }
-    public string ReadResponse()
-    {
-        string response = Console.ReadLine();
-        return response;
+        _date = DateTime.Now.ToString();
+        int number = new Random().Next(1, 8);
+        _prompt = prompts[number];
+        Console.Write($"{_prompt}: ");
+        _response = Console.ReadLine();
     }
 
-    public string FormatEntry(string date, string prompt, string response)
+    public string FormatEntry()
     {
-        string entry = $"{date}\n{prompt}\n\n{response}";
-        return entry;
+        return $"{_date}#{_prompt}#{_response}";
     }
+
+
 }

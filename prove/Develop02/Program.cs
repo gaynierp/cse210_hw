@@ -6,43 +6,28 @@ class Program
     static void Main(string[] args)
     {
         Menu myMenu = new Menu();
+        Journal myJournal = new Journal();
         int response = 0;
-        string fullEntry = "";
         while(response != 5)
         {
             response = myMenu.ProcessMenu();
             switch (response)
             {
                 case 1:
-                Console.WriteLine("\n\nCreate");
-                    // Call create JournalEntry
-                    JournalEntry entry = new JournalEntry();
-                    string date = entry.GetDate();
-                    string prompt = entry.RandomPrompt();
-                    Console.WriteLine(prompt);
-                    string reader = entry.ReadResponse();
-                    fullEntry = fullEntry + "\n\n" + entry.FormatEntry(date, prompt, reader);
+                    myJournal.CreateEntry();
                     break;
                 case 2:
-                    // Call display journal
-                    Console.WriteLine("\n\ndisplay");
-                    Journal display = new Journal();
-                    display.DisplayJournal(fullEntry);
+                    myJournal.DisplayJournal();
                     break;
                 case 3:
-                    // Call write to file
-                    Console.WriteLine("\n\nWrite to file\nWhat file would you like to save to?");
-                    string file = Console.ReadLine();
-                    Journal write = new Journal();
-                    write.WriteToFile(file, fullEntry);
-
+                    Console.WriteLine("What file would you like to save to?");
+                    string filename = Console.ReadLine();
+                    myJournal.WriteToFile(filename);
                     break;
                 case 4:
-                    // Call read to file
-                    Console.WriteLine("\n\nRead from file\nType a file to read from");
-                    string fileName = Console.ReadLine();
-                    Journal read = new Journal();
-                    read.ReadFromFile(fileName);
+                    Console.WriteLine("What file would you like to read from?");
+                    filename = Console.ReadLine();
+                    myJournal.ReadFromFile(filename);
                     break;
             }
         }
