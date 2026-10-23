@@ -16,7 +16,6 @@ class Word
     {
         _hidden = true;
     }
-
     public string GetWordString()
     {
         string returnString = "";
@@ -33,7 +32,6 @@ class Word
             }
         return returnString;
     }
-
     public void Display()
     {
         Console.Write($"{GetWordString()} ");

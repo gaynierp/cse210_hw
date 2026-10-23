@@ -1,28 +1,30 @@
 class Scripture
 {   
     private List<Word> _words;
-// TODO add scripture reference
+    private ScriptureReference _reference;
+    private List<int> _indexNumberList = new List<int>();
+
     public Scripture(string name, int chapter, int verse, string text)
     {
         _words = ConvertToWordList(text);
-        _words[7].Hide();
+        _reference = new ScriptureReference(name, chapter, verse);
     }
     public Scripture(string name, int chapter, int startVerse, int endVerse, string text)
     {
-        
+        _words = ConvertToWordList(text);
+        ScriptureReference reference = new ScriptureReference(name, chapter, startVerse, endVerse);
+        _reference = reference;
     }
 
     public void ShowScripture()
     {
+        Console.Clear();
+        Console.WriteLine(_reference.GetScriptureReference());
         foreach(Word word in _words)
         {
             word.Display();
         }
     }
-
-
-    // ADD constructor for scripture reference
-
     private List<Word> ConvertToWordList(string text)
     {
         List<Word> tempWordList = new List<Word>();
@@ -34,4 +36,37 @@ class Scripture
         }
         return tempWordList;
     }
+
+    public void HideRandomWords()
+    {
+        Random number = new Random();
+        for (int i = 0; i <= 3; i++){
+            int index = number.Next(0, _words.Count);
+            if (CheckLengthOfList()== false){
+
+                if (_indexNumberList.Contains(index))
+                {
+                    i--;
+                }
+                else
+                {
+                    _indexNumberList.Add(index);
+                    _words[index].Hide();
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+        public bool CheckLengthOfList()
+    {
+        if (_words.Count <= _indexNumberList.Count)
+        {
+            return true;
+        }
+        return false;
+    }
+
 }
